@@ -31,8 +31,8 @@
                 </button>
 
                 <ul class="dropdown-menu">
-                    <li><button type="button" class="dropdown-item" id="active" data-route="{{ route('admin.place.status') }}" data-word="تغییر وضعیت">فعالسازی</button></li>
-                    <li><button type="button" class="dropdown-item" id="deactive" data-route="{{ route('admin.place.status') }}" data-word="تغییر وضعیت">غیرفعالسازی</button></li>
+                    <li><button type="button" class="dropdown-item" id="active" data-route="{{ route('admin.place.status') }}" data-word="تغییر وضعیت">اصلاحی</button></li>
+                    <li><button type="button" class="dropdown-item" id="deactive" data-route="{{ route('admin.place.status') }}" data-word="تغییر وضعیت">تایید شده</button></li>
                 </ul>
             </div>
 

@@ -46,14 +46,13 @@
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
       <div class="drag-target"></div>
-      
+
     </div>
     <!-- / Layout wrapper -->
 
     @include('admin.layouts.script')
 
     <!-- sweet alert confirm-->
-    @include('admin.alerts.sweetalert.sweetalert-confirm')
 
     <!-- toast-->
     @include('admin.alerts.toast.session')

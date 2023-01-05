@@ -17,7 +17,6 @@
                 buttonsStyling: false
             }).then((result) => {
                 if (result.value == true) {
-
                     let ids = [];
                     $('.form-check-input.checkbox:checked').each(function(){
                         ids.push($(this).val());
