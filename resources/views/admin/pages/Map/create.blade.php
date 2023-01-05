@@ -362,10 +362,16 @@
                                 <small>مکان را برروی نقشه انتخاب کنید.</small>
                             </div>
 
+
                             <div class="row g-3">
                                 <div class="col-6 d-flex justify-content-between">
                                     <input type="text" name="point" id="point" value=""
                                            class="form-control">
+                                </div>
+                                <div class="mt-1">
+                                    @error('point')
+                                    <span class="text-danger">* {{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-md-12 mb-3" data-select2-id="45">

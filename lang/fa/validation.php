@@ -193,10 +193,15 @@ return [
         'guest_patient_mobile'      => 'تلفن همراهی بیمار',
         'bed_id'                    => 'نوع تخت',
         'insurance_number'          => 'شماره بیمه نامه',
-        'insurance'                 => 'بیمه', 
-        'part_id'                   => 'بخش',    
+        'insurance'                 => 'بیمه',
+        'part_id'                   => 'بخش',
         'hospital_id'               => 'بیمارستان',
         'code'                      => 'کد',
         'current_password'          => 'رمز عبور فعلی',
+        'owner_fname'               => 'نام مالک',
+        'owner_lname'               => 'نام خانوادگی مالک',
+        'owner_nationalcode'        => 'کدملی مالک',
+        'point'                     => 'مکان',
+
     ],
 ];

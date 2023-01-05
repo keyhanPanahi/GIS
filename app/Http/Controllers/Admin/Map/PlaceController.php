@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Map;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Map\PlaceRequest;
 use App\Models\Admin\City;
 use App\Models\Admin\Map\Place;
 use App\Models\Admin\Map\PropertyType;
@@ -90,10 +91,8 @@ class PlaceController extends Controller
         return view('admin.pages.Map.create', compact('PropertyTypes', 'UsageTypes', 'states'));
     }
 
-    public function store(Request $request)
+    public function store(PlaceRequest $request)
     {
-
-
         if ($request->point) {
 
             $trimPoint = trim($request->point,'LatLng');
