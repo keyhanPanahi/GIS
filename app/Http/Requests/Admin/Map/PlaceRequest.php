@@ -26,8 +26,8 @@ class PlaceRequest extends FormRequest
         return [
             'owner_fname' => 'required|max:25|min:2',
             'owner_lname' => 'required|max:25|min:2',
-            'owner_nationalcode' => 'required|number|max:10|min:10',
-            'postal_code' => 'required|number|max:10|min:10',
+            'owner_nationalcode' => 'required|digits:10',
+            'postal_code' => 'required|numeric|digits:10',
             'point' => 'required',
             'property_type_id' => 'required|exists:property_types,id',
             'usage_type_id' => 'required|exists:usage_types,id'

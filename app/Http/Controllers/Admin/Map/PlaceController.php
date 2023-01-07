@@ -95,12 +95,11 @@ class PlaceController extends Controller
     {
         if ($request->point) {
 
-            $trimPoint = trim($request->point,'LatLng');
+            $trimPoint = trim($request->point,'LatLng()');
             $city = City::where('id',$request->city_id)->first()->name;
             $state = City::where('id',$request->state_id)->first()->name;
             $address = [$state,$city,$request->address[0],$request->address[1],$request->address[2],$request->address[3],$request->address[4],$request->address[5]];
             $time = Carbon::now()->toDateTimeString();
-
             $createPlace = [
                 'owner_fname' => $request->owner_fname,
                 'owner_lname' => $request->owner_lname,
@@ -206,6 +205,12 @@ class PlaceController extends Controller
         }
 
         return response()->json(['error' => 'موردی انتخاب نشده است.']);
+    }
+
+    public function showMap()
+    {
+        $points = Place::select('id','point','owner_fname','owner_lname' , 'usage_type_id' )->where('place_status_id',1)->get();
+        return view('admin.pages.Map.showMap',compact('points'));
     }
 
 
