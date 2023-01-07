@@ -98,6 +98,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
        Route::post('/update/{place}','update')->name('admin.place.update');
        Route::post('/destroy','destroy')->name('admin.place.destroy');
        Route::post('/status','status')->name('admin.place.status');
+       Route::get('/show-map','showMap')->name('admin.place.showMap');
     });
 
 });

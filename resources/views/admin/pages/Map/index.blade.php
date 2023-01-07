@@ -20,6 +20,7 @@
         <div class="d-flex justify-content-between">
             <div class="pt-2">
                 <a href="{{ route('admin.place.create') }}" class="btn btn-primary"><i class="bx bx-plus"></i> ایجاد مکان</a>
+                <a href="{{ route('admin.place.showMap') }}" class="btn btn-warning"><i class="bx bxs-map-alt"></i> دیدن رو نقشه</a>
             </div>
 
             <div class="p-2">
