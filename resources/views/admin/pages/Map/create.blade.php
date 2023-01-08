@@ -81,6 +81,7 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="bs-stepper-content">
                     <form action="{{ route('admin.place.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -324,7 +325,7 @@
                                 <div class="col-sm-6">
                                     <label for="TagifyBasic" class="form-label">شماره تلفن</label>
                                     <input id="TagifyBasic" class="form-control" name="phone[]"
-                                           placeholder="09151515015">
+                                           placeholder="32252525">
                                     <div class="mt-1">
                                         @error('phone[]')
                                         <span class="text-danger">* {{ $message }}</span>

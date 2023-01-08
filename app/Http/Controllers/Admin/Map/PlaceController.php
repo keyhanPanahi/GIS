@@ -91,8 +91,9 @@ class PlaceController extends Controller
         return view('admin.pages.Map.create', compact('PropertyTypes', 'UsageTypes', 'states'));
     }
 
-    public function store(PlaceRequest $request)
+    public function store(Request $request)
     {
+
         if ($request->point) {
 
             $trimPoint = trim($request->point,'LatLng()');
@@ -137,7 +138,7 @@ class PlaceController extends Controller
                     $fileSize = $file->getSize();
                     $fileOriginalName = $file->getClientOriginalName();
                     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-                    $path = 'places' . DIRECTORY_SEPARATOR . $trimPoint . DIRECTORY_SEPARATOR . 'owner' . DIRECTORY_SEPARATOR . $request->owner_nationalcode . DIRECTORY_SEPARATOR . $filename;
+                    $path = 'places' . DIRECTORY_SEPARATOR . $trimPoint . DIRECTORY_SEPARATOR . 'owner' . DIRECTORY_SEPARATOR . $filename;
 
                     if (in_array($fileMimeType, $supportFileTypes)) {
                         //action on image
@@ -175,7 +176,7 @@ class PlaceController extends Controller
 
     public function show(Place $place)
     {
-        return view('admin.place.show', compact('place'));
+        return view('admin.pages.Map.show', compact('place'));
     }
 
 
