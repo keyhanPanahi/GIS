@@ -47,12 +47,6 @@
         <script>
             L.marker([{{$point->point}}]).addTo(map)
                 .bindPopup('<b> {{ $point->owner_fname . ' ' . $point->owner_lname }} </b> ');
-                @if($point->usage_type_id == 1)مسکونی
-
-                @elseif($point->usage_type_id == 2)تجاری
-
-                @elseاداری
-                @endif
 
         </script>
     @endforeach

@@ -451,14 +451,25 @@
 
         const popup = L.popup();
 
+        //https://api.neshan.org/v5/reverse?lat=32.870166&lng=59.227316
 
         function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent(` شما این نقطه را انتخاب کردید`)
-                .openOn(map);
-            let selectPoint = `${e.latlng.toString()}`;
-            document.getElementById("point").setAttribute('value', selectPoint);
+            $.ajax({
+                type: 'GET',
+                url: `https://api.neshan.org/v5/reverse?lat=${e.latlng.lat}&lng=${e.latlng.lng}`,
+                datatype: 'json',
+                headers: {
+                    'Api-Key': 'service.afc42246fe684d89b34ba220ef908cff'
+                },
+                success: function (response){
+                    popup
+                        .setLatLng(e.latlng)
+                        .setContent(response.formatted_address)
+                        .openOn(map);
+                    let selectPoint = `${e.latlng.toString()}`;
+                    document.getElementById("point").value = selectPoint;
+                }
+            });
         }
 
         map.on('click', onMapClick);

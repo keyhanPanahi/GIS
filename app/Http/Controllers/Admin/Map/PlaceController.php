@@ -209,9 +209,8 @@ class PlaceController extends Controller
 
     public function showMap()
     {
-        $points = Place::select('id','point','owner_fname','owner_lname' , 'usage_type_id' )->where('place_status_id',1)->get();
+        $points = Place::select('id','point','owner_fname','owner_lname' )->where('place_status_id',1)->get();
         return view('admin.pages.Map.showMap',compact('points'));
     }
-
 
 }
