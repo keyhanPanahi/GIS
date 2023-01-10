@@ -19,7 +19,7 @@ function UsageTypeLabel($record)
     if ($record->usage_type_id == 1) {
         return '<span class="rounded badge bg-label-vimeo pull-up">مسکونی<span>';
     } elseif ($record->usage_type_id == 2) {
-        return '<span class="badge bg-label-github pull-up">تجاری<span>';
+        return '<span class="badge bg-label-dribbble pull-up">تجاری<span>';
     } else {
         return '<span class="badge bg-label-twitter pull-up">اداری<span>';
     }}

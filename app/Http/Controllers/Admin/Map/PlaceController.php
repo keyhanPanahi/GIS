@@ -91,7 +91,7 @@ class PlaceController extends Controller
         return view('admin.pages.Map.create', compact('PropertyTypes', 'UsageTypes', 'states'));
     }
 
-    public function store(Request $request)
+    public function store(PlaceRequest $request)
     {
 
         if ($request->point) {
@@ -130,26 +130,21 @@ class PlaceController extends Controller
                 } else {
                     return back()->with('toast-error', 'فایل بارگذاری نشد.خطا برای سرور رخ داده است.');
                 }
-                $supportFileTypes = ['jpg', 'png'];
+                $supportFileTypes = ['image/jpg', 'image/png', 'image/svg'];
                 $files = $request->file;
-
                 foreach ($files as $file) {
+
                     $fileMimeType = $file->getClientMimeType();
                     $fileSize = $file->getSize();
                     $fileOriginalName = $file->getClientOriginalName();
                     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-                    $path = 'places' . DIRECTORY_SEPARATOR . $trimPoint . DIRECTORY_SEPARATOR . 'owner' . DIRECTORY_SEPARATOR . $filename;
-
+                    $path = 'places' . DIRECTORY_SEPARATOR . $request->postal_code . DIRECTORY_SEPARATOR . 'owner'. DIRECTORY_SEPARATOR . $request->owner_nationalcode . DIRECTORY_SEPARATOR . $filename;
                     if (in_array($fileMimeType, $supportFileTypes)) {
-                        //action on image
                         $getFile = Image::make($file)->stream('jpg', 25);
-                        //upload image to FTP
                         $result = $server->put($path, $getFile->__toString());
                     } else {
-                        //upload another file to FTP
                         $result = $server->put($path, file_get_contents($file->path()));
                     }
-                    //insert file info to database
                     if ($result) {
                         $place->files()->create([
                             'name' => $filename,
@@ -185,7 +180,7 @@ class PlaceController extends Controller
         $states = City::select('id', 'name')->where('parent_id', 0)->get();
         $PropertyTypes = PropertyType::select('id', 'name', 'status')->where('status', 1)->get();
         $UsageTypes = UsageType::select('id', 'name')->where('status', 1)->get();
-        return view('admin.place.edit', compact('place', 'states', 'UsageTypes', 'PropertyTypes'));
+        return view('admin.pages.Map.edit', compact('place', 'states', 'UsageTypes', 'PropertyTypes'));
     }
 
     public function status(Request $request)
