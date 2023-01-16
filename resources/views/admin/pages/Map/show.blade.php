@@ -271,8 +271,43 @@
                             <h6 class="mb-1">فایل</h6>
                         </div>
                         <div class="row g-3">
-
-
+                                @foreach($images as $file)
+                                @if ($file->mime_type == 'image/jpg' || $file->mime_type == 'image/png')
+                                <div class="col-3 card cont-main item animated wow fadeIn ">
+                                    <div class="content-overlay"></div>
+                                    <label for="file " class="label-custom">
+                                         <img class="card-img-top content-image" src="{{ asset('storage/temporary/'.'/'.$unique_path.'/'.$file->original_name) }}" alt="file photo" height="340">
+                                    </label>
+                                    <div class="btn-group " role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCenter{{ $file->id }}">
+                                            <i class="tf-icons bx bx-show"></i> مشاهده فایل
+                                        </button>
+                                    </div>
+                                </div>
+                                {{-- modal --}}
+                                <div class="modal fade" id="modalCenter{{ $file->id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title secondary-font" id="modalCenterTitle">{{ $file->original_name }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card mb-3">
+                                                    <img class="card-img-top" src="{{ asset('storage/temporary/'.$unique_path.'/'.$file->original_name) }}" alt="Card image cap">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                                    بستن
+                                                </button>
+                                                {{-- <button type="button" class="btn btn-primary">ذخیره تغییرات</button> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                                @endforeach
                             <div class="col-12 d-flex justify-content-between">
                                 <button type="button" class="btn btn-primary btn-prev">
                                     <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>

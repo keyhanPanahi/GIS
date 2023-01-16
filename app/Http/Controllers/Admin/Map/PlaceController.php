@@ -125,15 +125,12 @@ class PlaceController extends Controller
             if (isset($request->file)) {
 
                 $FTP = ExternalServer::find(1);
-                if ($FTP) {
-                    $server = Storage::createFtpDriver(['host' => $FTP->address, 'username' => $FTP->username, 'password' => $FTP->password,'port' => (int)$FTP->port]);
-                } else {
-                    return back()->with('toast-error', 'فایل بارگذاری نشد.خطا برای سرور رخ داده است.');
-                }
+
+                $server = $this->FTPConnect($FTP);
+
                 $supportFileTypes = ['image/jpg', 'image/png', 'image/svg'];
                 $files = $request->file;
                 foreach ($files as $file) {
-
                     $fileMimeType = $file->getClientMimeType();
                     $fileSize = $file->getSize();
                     $fileOriginalName = $file->getClientOriginalName();
@@ -171,7 +168,22 @@ class PlaceController extends Controller
 
     public function show(Place $place)
     {
-        return view('admin.pages.Map.show', compact('place'));
+        $images = $place->files()->whereIn('mime_type', ['image/jpg','image/png'])->where('external_server_id',1)->get();
+        $otherFiles = $place->files()->whereNotIn('mime_type', ['image/jpg','image/png'])->where('external_server_id',1)->get();
+        $unique_path = uniqid();
+        if($place->files->count() > 0)
+        {
+            foreach ($images as $file) {
+                $path = 'places' . DIRECTORY_SEPARATOR . $place->postal_code . DIRECTORY_SEPARATOR . 'owner'. DIRECTORY_SEPARATOR . $place->owner_nationalcode . DIRECTORY_SEPARATOR . $file->name;
+                $FTP = ExternalServer::find(1);
+                $server = $this->FTPConnect($FTP);
+                $get_ftp_file =  $server->get($path);
+                if ($get_ftp_file) {
+                    Storage::disk('temporary')->put($unique_path . DIRECTORY_SEPARATOR . $file->original_name, $get_ftp_file);
+                }
+            }
+        }
+        return view('admin.pages.Map.show', compact('place','images','otherFiles','unique_path'));
     }
 
 
@@ -207,6 +219,16 @@ class PlaceController extends Controller
     {
         $points = Place::select('id','point','owner_fname','owner_lname' )->where('place_status_id',1)->get();
         return view('admin.pages.Map.showMap',compact('points'));
+    }
+
+    private function FTPConnect($FTP)
+    {
+        if ($FTP) {
+            $server = Storage::createFtpDriver(['host' => $FTP->address, 'username' => $FTP->username, 'password' => $FTP->password, 'port' => (int)$FTP->port]);
+            return $server;
+        } else {
+            return back()->with('toast-error', 'فایل بارگذاری نشد.خطا برای سرور رخ داده است.');
+        }
     }
 
 }

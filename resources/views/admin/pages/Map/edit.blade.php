@@ -399,6 +399,8 @@
                                     <input class="form-control" type="file" name="file[]" id="formFileMultiple" multiple>
                                 </div>
 
+
+
                                 <div class="col-12 d-flex justify-content-between" style="margin-top: 40px">
                                     <button type="button" class="btn btn-primary btn-prev">
                                         <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
